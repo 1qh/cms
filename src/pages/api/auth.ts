@@ -7,15 +7,11 @@ export const POST: APIRoute = async ({ request }) => {
   const adminPassword = process.env.ADMIN_PASSWORD ?? import.meta.env.ADMIN_PASSWORD
   const githubToken = process.env.GITHUB_TOKEN ?? import.meta.env.GITHUB_TOKEN
 
-  if (!adminPassword || password !== adminPassword) {
-    return new Response(JSON.stringify({
-      error: 'Unauthorized',
-      hasPassword: !!adminPassword,
-      envKeys: Object.keys(process.env).filter(k => k.includes('ADMIN') || k.includes('GITHUB')),
-    }), { status: 401, headers: { 'Content-Type': 'application/json' } })
+  if (!adminPassword || password !== adminPassword.trim()) {
+    return new Response('Unauthorized', { status: 401 })
   }
 
-  return new Response(JSON.stringify({ token: githubToken }), {
+  return new Response(JSON.stringify({ token: githubToken?.trim() }), {
     headers: { 'Content-Type': 'application/json' },
   })
 }
