@@ -1,0 +1,33 @@
+---
+import Base from '@/layouts/Base.astro'
+import { getPosts, getCategories, resolveImageUrls } from '@/lib/content'
+import { marked } from 'marked'
+
+export function getStaticPaths() {
+  const posts = getPosts()
+  return posts.map((post) => ({
+    params: { category: post.category, slug: post.slug },
+    props: { post },
+  }))
+}
+
+const { post } = Astro.props
+const categories = getCategories()
+const cat = categories.find((c) => c.slug === post.category)
+const folder = `${post.date}-${post.slug}`
+const resolved = resolveImageUrls(post.body, post.category, folder)
+const html = await marked.parse(resolved)
+---
+
+<Base title={post.title}>
+  <article class="max-w-3xl mx-auto">
+    <header class="mb-8 space-y-2">
+      <a href={`/${post.category}`} class="text-sm text-muted-foreground hover:text-foreground transition-colors">
+        &larr; {cat?.title}
+      </a>
+      <h1 class="text-3xl font-heading font-bold">{post.title}</h1>
+      <time class="text-sm text-muted-foreground block">{post.date}</time>
+    </header>
+    <div class="prose prose-neutral dark:prose-invert max-w-none [&_img]:rounded-lg [&_img]:w-full" set:html={html} />
+  </article>
+</Base>

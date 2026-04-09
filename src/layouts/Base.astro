@@ -1,0 +1,46 @@
+---
+import '@/styles/global.css'
+import { getCategories } from '@/lib/content'
+
+interface Props {
+  title: string
+}
+
+const { title } = Astro.props
+const categories = await getCategories()
+const currentPath = Astro.url.pathname
+---
+
+<html lang="vi">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+  </head>
+  <body class="min-h-dvh flex flex-col">
+    <header class="sticky top-0 z-50 bg-background/80 backdrop-blur">
+      <nav class="mx-auto max-w-6xl px-4 py-3 flex items-center gap-6 overflow-x-auto">
+        <a href="/" class="font-heading text-lg font-bold shrink-0">Họ Lại Việt Nam</a>
+        {categories.map((cat) => (
+          <a
+            href={`/${cat.slug}`}
+            class:list={[
+              'text-sm whitespace-nowrap transition-colors',
+              currentPath.startsWith(`/${cat.slug}`)
+                ? 'text-foreground font-medium'
+                : 'text-muted-foreground hover:text-foreground',
+            ]}
+          >
+            {cat.title}
+          </a>
+        ))}
+      </nav>
+    </header>
+    <main class="mx-auto max-w-6xl w-full px-4 py-8 flex-1">
+      <slot />
+    </main>
+    <footer class="text-center text-sm text-muted-foreground py-8">
+      © {new Date().getFullYear()} Họ Lại Việt Nam
+    </footer>
+  </body>
+</html>

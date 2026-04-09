@@ -1,0 +1,218 @@
+backend:
+  name: github
+  repo: 1qh/lai-cms
+  branch: main
+  base_url: https://cms-two-rose.vercel.app
+  auth_endpoint: /admin/auth.html
+
+media_folder: public/content
+public_folder: /content
+
+collections:
+  - name: tin-tuc
+    label: "Tin tức"
+    folder: public/content/tin-tuc
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    path: "{{slug}}/index"
+    media_folder: ""
+    public_folder: ""
+    fields:
+      - { name: title, widget: string, label: "Tiêu đề" }
+      - { name: date, widget: datetime, label: "Ngày", date_format: "YYYY-MM-DD", time_format: false, format: "YYYY-MM-DD" }
+      - { name: body, widget: markdown, label: "Nội dung" }
+
+  - name: thong-tin
+    label: "Thông tin"
+    folder: public/content/thong-tin
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    path: "{{slug}}/index"
+    media_folder: ""
+    public_folder: ""
+    fields:
+      - { name: title, widget: string, label: "Tiêu đề" }
+      - { name: date, widget: datetime, label: "Ngày", date_format: "YYYY-MM-DD", time_format: false, format: "YYYY-MM-DD" }
+      - { name: body, widget: markdown, label: "Nội dung" }
+
+  - name: hoat-dong-dong-ho
+    label: "Hoạt động dòng họ"
+    folder: public/content/hoat-dong-dong-ho
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    path: "{{slug}}/index"
+    media_folder: ""
+    public_folder: ""
+    fields:
+      - { name: title, widget: string, label: "Tiêu đề" }
+      - { name: date, widget: datetime, label: "Ngày", date_format: "YYYY-MM-DD", time_format: false, format: "YYYY-MM-DD" }
+      - { name: body, widget: markdown, label: "Nội dung" }
+
+  - name: lich-su-dong-ho
+    label: "Lịch sử dòng họ"
+    folder: public/content/lich-su-dong-ho
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    path: "{{slug}}/index"
+    media_folder: ""
+    public_folder: ""
+    fields:
+      - { name: title, widget: string, label: "Tiêu đề" }
+      - { name: date, widget: datetime, label: "Ngày", date_format: "YYYY-MM-DD", time_format: false, format: "YYYY-MM-DD" }
+      - { name: body, widget: markdown, label: "Nội dung" }
+
+  - name: danh-nhan-ho-lai
+    label: "Danh nhân họ Lại"
+    folder: public/content/danh-nhan-ho-lai
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    path: "{{slug}}/index"
+    media_folder: ""
+    public_folder: ""
+    fields:
+      - { name: title, widget: string, label: "Tiêu đề" }
+      - { name: date, widget: datetime, label: "Ngày", date_format: "YYYY-MM-DD", time_format: false, format: "YYYY-MM-DD" }
+      - { name: body, widget: markdown, label: "Nội dung" }
+
+  - name: hoat-dong-cac-chi-ho
+    label: "Hoạt động các chi họ"
+    folder: public/content/hoat-dong-cac-chi-ho
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    path: "{{slug}}/index"
+    media_folder: ""
+    public_folder: ""
+    fields:
+      - { name: title, widget: string, label: "Tiêu đề" }
+      - { name: date, widget: datetime, label: "Ngày", date_format: "YYYY-MM-DD", time_format: false, format: "YYYY-MM-DD" }
+      - { name: body, widget: markdown, label: "Nội dung" }
+
+  - name: hoi-dong-gia-toc-ho-lai
+    label: "Hội đồng gia tộc họ Lại"
+    folder: public/content/hoi-dong-gia-toc-ho-lai
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    path: "{{slug}}/index"
+    media_folder: ""
+    public_folder: ""
+    fields:
+      - { name: title, widget: string, label: "Tiêu đề" }
+      - { name: date, widget: datetime, label: "Ngày", date_format: "YYYY-MM-DD", time_format: false, format: "YYYY-MM-DD" }
+      - { name: body, widget: markdown, label: "Nội dung" }
+
+  - name: hoi-doanh-nhan-lai-viet
+    label: "Hội Doanh nhân Lại Việt"
+    folder: public/content/hoi-doanh-nhan-lai-viet
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    path: "{{slug}}/index"
+    media_folder: ""
+    public_folder: ""
+    fields:
+      - { name: title, widget: string, label: "Tiêu đề" }
+      - { name: date, widget: datetime, label: "Ngày", date_format: "YYYY-MM-DD", time_format: false, format: "YYYY-MM-DD" }
+      - { name: body, widget: markdown, label: "Nội dung" }
+
+  - name: khuyen-hoc-khuyen-tai
+    label: "Khuyến học - Khuyến Tài"
+    folder: public/content/khuyen-hoc-khuyen-tai
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    path: "{{slug}}/index"
+    media_folder: ""
+    public_folder: ""
+    fields:
+      - { name: title, widget: string, label: "Tiêu đề" }
+      - { name: date, widget: datetime, label: "Ngày", date_format: "YYYY-MM-DD", time_format: false, format: "YYYY-MM-DD" }
+      - { name: body, widget: markdown, label: "Nội dung" }
+
+  - name: nha-tho-ho-lai
+    label: "Nhà thờ họ Lại"
+    folder: public/content/nha-tho-ho-lai
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    path: "{{slug}}/index"
+    media_folder: ""
+    public_folder: ""
+    fields:
+      - { name: title, widget: string, label: "Tiêu đề" }
+      - { name: date, widget: datetime, label: "Ngày", date_format: "YYYY-MM-DD", time_format: false, format: "YYYY-MM-DD" }
+      - { name: body, widget: markdown, label: "Nội dung" }
+
+  - name: tai-lieu-dong-ho
+    label: "Tài liệu tham khảo"
+    folder: public/content/tai-lieu-dong-ho
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    path: "{{slug}}/index"
+    media_folder: ""
+    public_folder: ""
+    fields:
+      - { name: title, widget: string, label: "Tiêu đề" }
+      - { name: date, widget: datetime, label: "Ngày", date_format: "YYYY-MM-DD", time_format: false, format: "YYYY-MM-DD" }
+      - { name: body, widget: markdown, label: "Nội dung" }
+
+  - name: van-hoa-nghe-thuat
+    label: "Văn hóa - Nghệ Thuật"
+    folder: public/content/van-hoa-nghe-thuat
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    path: "{{slug}}/index"
+    media_folder: ""
+    public_folder: ""
+    fields:
+      - { name: title, widget: string, label: "Tiêu đề" }
+      - { name: date, widget: datetime, label: "Ngày", date_format: "YYYY-MM-DD", time_format: false, format: "YYYY-MM-DD" }
+      - { name: body, widget: markdown, label: "Nội dung" }
+
+  - name: giay-moi
+    label: "Giấy mời"
+    folder: public/content/giay-moi
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    path: "{{slug}}/index"
+    media_folder: ""
+    public_folder: ""
+    fields:
+      - { name: title, widget: string, label: "Tiêu đề" }
+      - { name: date, widget: datetime, label: "Ngày", date_format: "YYYY-MM-DD", time_format: false, format: "YYYY-MM-DD" }
+      - { name: body, widget: markdown, label: "Nội dung" }
+
+  - name: ho-lai-ngay-nay
+    label: "Họ Lại ngày nay"
+    folder: public/content/ho-lai-ngay-nay
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    path: "{{slug}}/index"
+    media_folder: ""
+    public_folder: ""
+    fields:
+      - { name: title, widget: string, label: "Tiêu đề" }
+      - { name: date, widget: datetime, label: "Ngày", date_format: "YYYY-MM-DD", time_format: false, format: "YYYY-MM-DD" }
+      - { name: body, widget: markdown, label: "Nội dung" }
+
+  - name: ban-lien-lac-con-chau-ho-lai-viet-nam
+    label: "Ban liên lạc con cháu họ Lại Việt Nam"
+    folder: public/content/ban-lien-lac-con-chau-ho-lai-viet-nam
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    path: "{{slug}}/index"
+    media_folder: ""
+    public_folder: ""
+    fields:
+      - { name: title, widget: string, label: "Tiêu đề" }
+      - { name: date, widget: datetime, label: "Ngày", date_format: "YYYY-MM-DD", time_format: false, format: "YYYY-MM-DD" }
+      - { name: body, widget: markdown, label: "Nội dung" }
+
+  - name: about
+    label: "Giới thiệu"
+    folder: public/content/about
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    path: "{{slug}}/index"
+    media_folder: ""
+    public_folder: ""
+    fields:
+      - { name: title, widget: string, label: "Tiêu đề" }
+      - { name: date, widget: datetime, label: "Ngày", date_format: "YYYY-MM-DD", time_format: false, format: "YYYY-MM-DD" }
+      - { name: body, widget: markdown, label: "Nội dung" }

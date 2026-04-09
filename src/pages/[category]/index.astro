@@ -1,0 +1,40 @@
+---
+import Base from '@/layouts/Base.astro'
+import { getPosts, getCategories } from '@/lib/content'
+
+export function getStaticPaths() {
+  const categories = getCategories()
+  return categories.map((cat) => ({ params: { category: cat.slug }, props: { cat } }))
+}
+
+const { cat } = Astro.props
+const posts = getPosts().filter((p) => p.category === cat.slug)
+---
+
+<Base title={cat.title}>
+  <h1 class="text-3xl font-heading font-bold mb-8">{cat.title}</h1>
+  {posts.length === 0 ? (
+    <p class="text-muted-foreground">Chưa có bài viết nào.</p>
+  ) : (
+    <ul class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+      {posts.map((post) => (
+        <li>
+          <a href={`/${post.category}/${post.slug}`} class="group block space-y-3">
+            {post.coverUrl && (
+              <img
+                src={post.coverUrl}
+                alt={post.title}
+                loading="lazy"
+                class="aspect-[3/2] w-full object-cover rounded-lg bg-muted"
+              />
+            )}
+            <time class="text-xs text-muted-foreground">{post.date}</time>
+            <h2 class="font-medium leading-snug group-hover:text-primary/70 transition-colors line-clamp-2">
+              {post.title}
+            </h2>
+          </a>
+        </li>
+      ))}
+    </ul>
+  )}
+</Base>
