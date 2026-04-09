@@ -12,6 +12,7 @@
       button { padding: 0.5rem; font-size: 1rem; background: #111; color: #fff; border: none; border-radius: 0.375rem; cursor: pointer; }
       .error { color: #e11; font-size: 0.875rem; display: none; }
     </style>
+    <script>window.CMS_MANUAL_INIT = true</script>
   </head>
   <body>
     <div id="gate">
@@ -21,45 +22,9 @@
         <p class="error" id="e">Sai mật khẩu</p>
       </form>
     </div>
+    <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
     <script>
-      document.getElementById('f').onsubmit = async (e) => {
-        e.preventDefault()
-        const res = await fetch('/api/auth', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ password: document.getElementById('p').value }),
-        })
-        if (res.ok) {
-          const { token } = await res.json()
-          document.getElementById('gate').remove()
-          // Load Decap CMS with the token injected
-          window.CMS_MANUAL_INIT = true
-          const script = document.createElement('script')
-          script.src = 'https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js'
-          script.onload = () => {
-            window.CMS.init({
-              config: {
-                backend: {
-                  name: 'github',
-                  repo: '1qh/cms',
-                  branch: 'main',
-                  api_root: 'https://api.github.com',
-                  auth_type: 'token',
-                  token: token,
-                },
-                media_folder: 'public/content',
-                public_folder: '/content',
-                collections: window.__CMS_COLLECTIONS,
-              },
-            })
-          }
-          document.head.appendChild(script)
-        } else {
-          document.getElementById('e').style.display = 'block'
-        }
-      }
-
-      window.__CMS_COLLECTIONS = [
+      var collections = [
         { name: 'tin-tuc', label: 'Tin tức', folder: 'public/content/tin-tuc', create: true, slug: '{{year}}-{{month}}-{{day}}-{{slug}}', path: '{{slug}}/index', media_folder: '', public_folder: '', fields: [{ name: 'title', widget: 'string', label: 'Tiêu đề' }, { name: 'body', widget: 'markdown', label: 'Nội dung' }] },
         { name: 'thong-tin', label: 'Thông tin', folder: 'public/content/thong-tin', create: true, slug: '{{year}}-{{month}}-{{day}}-{{slug}}', path: '{{slug}}/index', media_folder: '', public_folder: '', fields: [{ name: 'title', widget: 'string', label: 'Tiêu đề' }, { name: 'body', widget: 'markdown', label: 'Nội dung' }] },
         { name: 'hoat-dong-dong-ho', label: 'Hoạt động dòng họ', folder: 'public/content/hoat-dong-dong-ho', create: true, slug: '{{year}}-{{month}}-{{day}}-{{slug}}', path: '{{slug}}/index', media_folder: '', public_folder: '', fields: [{ name: 'title', widget: 'string', label: 'Tiêu đề' }, { name: 'body', widget: 'markdown', label: 'Nội dung' }] },
@@ -77,6 +42,36 @@
         { name: 'ban-lien-lac-con-chau-ho-lai-viet-nam', label: 'Ban liên lạc con cháu họ Lại VN', folder: 'public/content/ban-lien-lac-con-chau-ho-lai-viet-nam', create: true, slug: '{{year}}-{{month}}-{{day}}-{{slug}}', path: '{{slug}}/index', media_folder: '', public_folder: '', fields: [{ name: 'title', widget: 'string', label: 'Tiêu đề' }, { name: 'body', widget: 'markdown', label: 'Nội dung' }] },
         { name: 'about', label: 'Giới thiệu', folder: 'public/content/about', create: true, slug: '{{year}}-{{month}}-{{day}}-{{slug}}', path: '{{slug}}/index', media_folder: '', public_folder: '', fields: [{ name: 'title', widget: 'string', label: 'Tiêu đề' }, { name: 'body', widget: 'markdown', label: 'Nội dung' }] },
       ]
+
+      document.getElementById('f').onsubmit = async function(e) {
+        e.preventDefault()
+        var res = await fetch('/api/auth', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ password: document.getElementById('p').value }),
+        })
+        if (res.ok) {
+          var data = await res.json()
+          document.getElementById('gate').remove()
+          window.CMS.init({
+            config: {
+              backend: {
+                name: 'github',
+                repo: '1qh/cms',
+                branch: 'main',
+                api_root: 'https://api.github.com',
+                auth_type: 'token',
+                token: data.token,
+              },
+              media_folder: 'public/content',
+              public_folder: '/content',
+              collections: collections,
+            },
+          })
+        } else {
+          document.getElementById('e').style.display = 'block'
+        }
+      }
     </script>
   </body>
 </html>
