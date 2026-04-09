@@ -19,7 +19,24 @@ import {
   type MDXEditorMethods,
 } from '@mdxeditor/editor'
 import '@mdxeditor/editor/style.css'
-import { useRef } from 'react'
+import { useRef, useMemo } from 'react'
+
+function resolveImages(md: string, category: string, folder?: string): string {
+  if (!folder) return md
+  return md.replace(
+    /!\[([^\]]*)\]\((?!https?:\/\/)(?!\/content\/)([^)]+)\)/g,
+    (_, alt: string, src: string) => `![${alt}](/content/${category}/${folder}/${src})`
+  )
+}
+
+function unresolveImages(md: string, category: string, folder?: string): string {
+  if (!folder) return md
+  const prefix = `/content/${category}/${folder}/`
+  return md.replace(
+    new RegExp(`!\\[([^\\]]*)\\]\\(${prefix.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}([^)]+)\\)`, 'g'),
+    (_, alt: string, src: string) => `![${alt}](${src})`
+  )
+}
 
 export function Editor({
   markdown,
@@ -34,11 +51,16 @@ export function Editor({
 }) {
   const ref = useRef<MDXEditorMethods>(null)
 
+  const resolved = useMemo(() => resolveImages(markdown, category, folder), [markdown, category, folder])
+
+  const handleChange = (md: string) => {
+    onChange(unresolveImages(md, category, folder))
+  }
+
   const imageUploadHandler = async (image: File) => {
     const formData = new FormData()
     formData.append('file', image)
 
-    // Determine the path for the image
     const ext = image.name.split('.').pop() ?? 'jpg'
     const timestamp = Date.now()
     const imagePath = folder
@@ -58,8 +80,8 @@ export function Editor({
   return (
     <MDXEditor
       ref={ref}
-      markdown={markdown}
-      onChange={onChange}
+      markdown={resolved}
+      onChange={handleChange}
       contentEditableClassName="prose prose-neutral dark:prose-invert max-w-none min-h-[400px]"
       plugins={[
         headingsPlugin(),
