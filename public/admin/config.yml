@@ -1,6 +1,6 @@
 backend:
   name: github
-  repo: 1qh/lai-cms
+  repo: 1qh/cms
   branch: main
   base_url: https://cms-two-rose.vercel.app
   auth_endpoint: /admin/auth.html
