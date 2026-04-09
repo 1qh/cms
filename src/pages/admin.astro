@@ -1,0 +1,16 @@
+---
+export const prerender = false
+import '@/styles/global.css'
+import { AdminApp } from '@/components/AdminApp'
+---
+
+<html lang="vi">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Admin</title>
+  </head>
+  <body class="min-h-dvh bg-background text-foreground p-4 sm:p-8">
+    <AdminApp client:load />
+  </body>
+</html>
