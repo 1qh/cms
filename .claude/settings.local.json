@@ -1,9 +1,0 @@
-{
-  "permissions": {
-    "allow": [
-      "Bash(cp -r ~/lai-cms/* .)",
-      "Bash(rm -rf .git)",
-      "Bash(cp -r ~/lai-cms/.git .)"
-    ]
-  }
-}
