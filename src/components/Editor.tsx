@@ -87,7 +87,7 @@ export function Editor({
         headingsPlugin(),
         listsPlugin(),
         linkDialogPlugin(),
-        imagePlugin({ imageUploadHandler }),
+        imagePlugin({ imageUploadHandler, disableImageResize: true }),
         quotePlugin(),
         tablePlugin(),
         thematicBreakPlugin(),
